@@ -18,14 +18,14 @@ import time
  
 class ledshift(object):
 
-	def __init__(self):
+	def __init__(self, serialPin=18, latchPin=23, clockPin=24, clearPin=25):
 		GPIO.setmode(GPIO.BCM)
 		GPIO.setwarnings( False )
  
-		self.SER_PIN	= 18
-		self.LATCH_PIN = 23
-		self.CLOCK_PIN = 24
-		self.CLEAR_PIN = 25
+		self.SER_PIN	= serialPin 
+		self.LATCH_PIN = latchPin
+		self.CLOCK_PIN = clockPin
+		self.CLEAR_PIN = clearPin 
 
 		GPIO.setup(self.SER_PIN, GPIO.OUT)
 		GPIO.setup(self.LATCH_PIN, GPIO.OUT)
