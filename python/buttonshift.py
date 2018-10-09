@@ -18,7 +18,7 @@ import time
 
 class buttonshift(object):
 
-	def __init__(self, buttonPin=26, serialPin=3, latchPin=4, clockPin=27, clearPin=22):
+	def __init__(self, buttonPin=17, serialPin=3, latchPin=4, clockPin=27, clearPin=22):
 		GPIO.setmode(GPIO.BCM)
 		GPIO.setwarnings(False)
 		self.BUTTON_PIN = buttonPin
