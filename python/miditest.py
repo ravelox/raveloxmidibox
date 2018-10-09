@@ -25,12 +25,40 @@ r = raveloxmidi()
 
 r.connect()
 
+prev_state = 0
+
+def isOn( button, oldstate, newstate):
+	button_prev = oldstate & button
+	button_now = newstate & button
+	return_val = False
+	if button_prev==0 and button_now>0:
+		return_val = True
+	return return_val
+
+def isOff( button, oldstate, newstate ):
+	button_prev = oldstate & button
+	button_now = newstate & button
+	return_val = False
+	if button_prev>0 and button_now==0:
+		return_val = True
+	return return_val
+
 while True:
 	buttons = b.poll_buttons()
 	l.shift_byte( buttons )
-	if buttons & 0x01:
-		r.send_note( 0x06, 0x24, 0x7f )
-	if buttons & 0x02:
-		r.send_note( 0x06, 0x26, 0x7f )
+
+	if isOn( 0x01, prev_state, buttons ):
+		r.note_on( 0x06, 0x24, 0x7f )
+
+	if isOff( 0x01, prev_state, buttons ):
+		r.note_off( 0x06, 0x24, 0x7f )
+
+	if isOn( 0x02, prev_state, buttons ):
+		r.note_on( 0x06, 0x26, 0x7f )
+
+	if isOff( 0x02, prev_state, buttons ):
+		r.note_off( 0x06, 0x26, 0x7f )
+
+	prev_state = buttons
 
 r.close()
