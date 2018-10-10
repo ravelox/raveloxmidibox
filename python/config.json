@@ -4,6 +4,6 @@
 		{ "button_id":2, "name":"Snare", "type":"note", "midi_channel":6, "midi_id":38, "midi_value":127 },
 		{ "button_id":4, "name":"Tom", "type":"note", "midi_channel":6, "midi_id":40, "midi_value":127 }
 	],
-	"remote_host":"192.168.0.215",
+	"remote_host":"localhost",
 	"remote_port":5006
 }
