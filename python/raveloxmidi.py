@@ -21,14 +21,17 @@ import time
 
 class raveloxmidi(object):
 
+	__host = None
+	__port = 0
+
 	def __init__(self, host="localhost", port=5006):
 		self.__socket = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
-		self.host = host
-		self.port = port
+		self.__host = host
+		self.__port = port
 		self.__state = 1
 
 	def connect(self):
-		self.__socket.connect( (self.host, self.port) )
+		self.__socket.connect( (self.__host, self.__port) )
 
 	def close(self):
 		self.__socket.close()

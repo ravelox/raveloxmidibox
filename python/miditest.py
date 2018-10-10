@@ -18,11 +18,17 @@
 from buttonshift import *
 from ledshift import *
 from raveloxmidi import *
+from config import *
+
+import pprint
 
 l = ledshift()
 b = buttonshift()
-r = raveloxmidi()
+c = config("config.json")
 
+cb = c['buttons']
+
+r = raveloxmidi( c['remote_host'], c['remote_port'] )
 r.connect()
 
 prev_state = 0
@@ -47,17 +53,13 @@ while True:
 	buttons = b.poll_buttons()
 	l.shift_byte( buttons )
 
-	if isOn( 0x01, prev_state, buttons ):
-		r.note_on( 0x06, 0x24, 0x7f )
+	for button in cb:
+		if isOn( button['button_id'], prev_state, buttons ):
+			r.note_on( button['midi_channel'], button['midi_id'], button['midi_value'] )
+			print button['name']
 
-	if isOff( 0x01, prev_state, buttons ):
-		r.note_off( 0x06, 0x24, 0x7f )
-
-	if isOn( 0x02, prev_state, buttons ):
-		r.note_on( 0x06, 0x26, 0x7f )
-
-	if isOff( 0x02, prev_state, buttons ):
-		r.note_off( 0x06, 0x26, 0x7f )
+		if isOff( button['button_id'], prev_state, buttons ):
+			r.note_off( button['midi_channel'], button['midi_id'], button['midi_value'] )
 
 	prev_state = buttons
 
