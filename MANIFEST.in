@@ -1,0 +1,3 @@
+graft raveloxmidiboxui/static
+graft raveloxmidiboxui/templates
+global-exclude *.pyc
