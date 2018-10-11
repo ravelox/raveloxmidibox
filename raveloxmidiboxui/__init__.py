@@ -35,6 +35,7 @@ def create_app(test_config=None):
 
 	from . import raveloxmidiconfig
 	app.register_blueprint(raveloxmidiconfig.bp)
+	raveloxmidiconfig.init_app(app)
 
 	@app.route('/whoami')
 	def whoami():
