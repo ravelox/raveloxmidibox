@@ -33,6 +33,9 @@ def create_app(test_config=None):
 	except OSError:
 		pass
 
+	from . import raveloxmidiconfig
+	app.register_blueprint(raveloxmidiconfig.bp)
+
 	@app.route('/whoami')
 	def whoami():
 		return "Success"
