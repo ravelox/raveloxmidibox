@@ -37,6 +37,12 @@ def create_app(test_config=None):
 	app.register_blueprint(raveloxmidiconfig.bp)
 	raveloxmidiconfig.init_app(app)
 
+	from . import buttondisplay
+	app.register_blueprint(buttondisplay.bp)
+	
+	from . import polltest
+	app.register_blueprint(polltest.bp)
+
 	@app.route('/whoami')
 	def whoami():
 		return "Success"
