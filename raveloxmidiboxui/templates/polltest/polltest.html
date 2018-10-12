@@ -1,5 +1,6 @@
 <HTML>
 <HEAD>
+<LINK  REL="stylesheet" type="text/css" href="{{ url_for('static', filename='css/polling.css') }}">
 <SCRIPT LANGUAGE="Javascript" SRC="{{ url_for('static', filename='js/polling.js') }}"></SCRIPT>
 </HEAD>
 <BODY onLoad="pollStatus();">
@@ -10,5 +11,19 @@
 </DIV>
 <DIV id="thepara" border=2>
 </DIV>
+<TABLE>
+<TR>
+<TD>	<IMG SRC="{{ url_for('static', filename='img/red-button-up.png') }}" HEIGHT=100 WIDTH=100> </TD>
+<TD>	<IMG SRC="{{ url_for('static', filename='img/red-button-up.png') }}" HEIGHT=100 WIDTH=100> </TD>
+<TD>	<IMG SRC="{{ url_for('static', filename='img/red-button-up.png') }}" HEIGHT=100 WIDTH=100> </TD>
+<TD>	<IMG SRC="{{ url_for('static', filename='img/red-button-up.png') }}" HEIGHT=100 WIDTH=100> </TD>
+</TR>
+<TR>
+<TD>	<IMG SRC="{{ url_for('static', filename='img/red-button-up.png') }}" HEIGHT=100 WIDTH=100> </TD>
+<TD>	<IMG SRC="{{ url_for('static', filename='img/red-button-up.png') }}" HEIGHT=100 WIDTH=100> </TD>
+<TD>	<IMG SRC="{{ url_for('static', filename='img/red-button-up.png') }}" HEIGHT=100 WIDTH=100> </TD>
+<TD>	<IMG SRC="{{ url_for('static', filename='img/red-button-up.png') }}" HEIGHT=100 WIDTH=100> </TD>
+</TR>
+</TABLE>
 </BODY>
 </HTML>
