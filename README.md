@@ -8,4 +8,6 @@ To be done:
 
 Scripts, STL files, BOM and config UI.
 
+Note: THIS SOFTWARE IS UNUSABLE RIGHT NOW. I'M FITTING THE PIECES TOGETHER AND I'LL CREATE A v0.0.1 RELEASE WHEN IT WORKS
+
 This software is released under GPLv3
