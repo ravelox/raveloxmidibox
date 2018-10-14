@@ -36,11 +36,10 @@ class raveloxmidi(object):
 	def close(self):
 		self.__socket.close()
 
+# Note ON
 	def note_on(self, channel, note, velocity):
 		if channel > 15:
 			channel = channel & 0x0f
-
-# Note ON
 		command = 0x90 | channel
 		bytes = struct.pack( "BBBB", 0xaa,command, note, velocity )
 		try:
@@ -48,10 +47,10 @@ class raveloxmidi(object):
 		except:
 			print "Unable to send NoteOn"
 
+# Note OFF
 	def note_off(self, channel, note, velocity):
 		if channel > 15:
 			channel = channel &0x0f
-# Note OFF
 		command = 0x80 | channel
 		bytes = struct.pack( "BBBB", 0xaa, command, note, velocity )
 		try:

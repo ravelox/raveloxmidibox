@@ -73,13 +73,12 @@ while True:
 	l.shift_byte( button_value )
 
 	for button in cb:
-		if isOn( button['button_id'], prev_state, button_count ):
+		if isOn( button['button_id'], prev_state, button_value ):
 			r.note_on( button['midi_channel'], button['midi_id'], button['midi_value'] )
 			print button['name']
-
-		if isOff( button['button_id'], prev_state, button_count ):
+		if isOff( button['button_id'], prev_state, button_value ):
 			r.note_off( button['midi_channel'], button['midi_id'], button['midi_value'] )
 
-	prev_state = button_count
+	prev_state = button_value
 
 r.close()
