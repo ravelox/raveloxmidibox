@@ -18,7 +18,7 @@ import time
  
 class ledshift(object):
 
-	def __init__(self, serialPin=18, latchPin=23, clockPin=24, clearPin=25):
+	def __init__(self, numLEDs=8, serialPin=18, latchPin=23, clockPin=24, clearPin=25):
 		GPIO.setmode(GPIO.BCM)
 		GPIO.setwarnings( False )
  
@@ -26,6 +26,7 @@ class ledshift(object):
 		self.LATCH_PIN = latchPin
 		self.CLOCK_PIN = clockPin
 		self.CLEAR_PIN = clearPin 
+		self.__num_leds= numLEDs
 
 		GPIO.setup(self.SER_PIN, GPIO.OUT)
 		GPIO.setup(self.LATCH_PIN, GPIO.OUT)
@@ -54,7 +55,7 @@ class ledshift(object):
 # Send a whole byte
 #
 	def shift_byte( self, byte ):
-		x=7
+		x=( self.__num_leds - 1 )
 		GPIO.output( self.LATCH_PIN, 0)
 		while x >= 0:
 			mask = ( 1 << x )

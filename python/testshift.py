@@ -17,10 +17,23 @@
 
 from buttonshift import *
 from ledshift import *
+import time
 
 l = ledshift()
 b = buttonshift()
 
+x = 5
+print "Press the last button and hold it"
+while x > 0:
+	time.sleep(1)
+	print(x)
+	x = x - 1
+time.sleep(1)
+
+print "Checking buttons"
+available_buttons = b.discover()
+print str(available_buttons) + " buttons found"
+
 while True:
-	buttons = b.poll_buttons()
-	l.shift_byte( buttons )
+	(button_value, button_count) = b.poll_buttons()
+	l.shift_byte( button_value )

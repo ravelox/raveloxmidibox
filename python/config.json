@@ -1,4 +1,5 @@
 {
+	"num_buttons":0,
 	"buttons" : [
 		{ "button_id":1, "name":"Kick", "type":"note", "midi_channel":6, "midi_id":36, "midi_value":127},
 		{ "button_id":2, "name":"Snare", "type":"note", "midi_channel":6, "midi_id":38, "midi_value":127 },

@@ -15,9 +15,10 @@
 
 import RPi.GPIO as GPIO
 import time
+import math
 
 class buttonshift(object):
-
+	__num_buttons = 8;
 	def __init__(self, buttonPin=17, serialPin=3, latchPin=4, clockPin=27, clearPin=22):
 		GPIO.setmode(GPIO.BCM)
 		GPIO.setwarnings(False)
@@ -26,7 +27,6 @@ class buttonshift(object):
 		self.LATCH_PIN = latchPin
 		self.CLOCK_PIN = clockPin
 		self.CLEAR_PIN = clearPin
-	
 		self.reset()
 
 	def reset(self):
@@ -38,8 +38,7 @@ class buttonshift(object):
 #
 # Initialise the pins
 #
-		GPIO.output( self.CLEAR_PIN, 0 )
-		GPIO.output( self.CLEAR_PIN, 1 )
+		self.__toggle_clear()
 
 #
 # Toggle the clock pin
@@ -47,6 +46,15 @@ class buttonshift(object):
 	def __tick_clock(self):
 		GPIO.output( self.CLOCK_PIN, 1 )
 		GPIO.output( self.CLOCK_PIN, 0 )
+#
+# Toggle the clear pin
+#
+	def __toggle_clear(self):
+		GPIO.output( self.CLEAR_PIN, 0 )
+		GPIO.output( self.CLEAR_PIN, 1 )
+
+	def set_num_buttons(self, numButtons):
+		self.__num_buttons = numButtons
 
 #
 # Poll the buttons by making each pin high
@@ -55,22 +63,35 @@ class buttonshift(object):
 	def poll_buttons(self):
 		button_presses = 0
 		x = 0
+		m = 0
+		self.__toggle_clear()
 		GPIO.output( self.SER_PIN, 1 )
-		while x < 8:
+		while x < self.__num_buttons:
 			GPIO.output( self.LATCH_PIN, 0 )
 			self.__tick_clock()
 			GPIO.output( self.LATCH_PIN, 1 )
 			result = GPIO.input( self.BUTTON_PIN ) 
 			if result == GPIO.HIGH:
 				button_presses = button_presses + ( 1 << x )
+				m = max( m, x+1 )
 			x = x + 1
 			GPIO.output( self.SER_PIN, 0 )
-		return button_presses
+		return button_presses, m
+
+	def discover(self):
+		old_buttons = self.__num_buttons;
+		self.__num_buttons = 256;
+		(button_value,button_max) = self.poll_buttons()
+		if button_value == 0:
+			self.__num_buttons = old_buttons
+		else:
+			self.__num_buttons = button_max
+		return self.__num_buttons
 
 	def selftest(self):
 		prev_result = 0
 		while True:
-			this_result = self.poll_buttons()
-			if this_result <> prev_result:
-				print this_result
-			prev_result = this_result
+			(this_result,button_max) = self.poll_buttons()
+			if this_result != prev_result:
+				print("Button value ",this_result," Max=",button_max)
+				prev_result = this_result
