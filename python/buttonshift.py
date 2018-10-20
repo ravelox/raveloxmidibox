@@ -27,14 +27,20 @@ class buttonshift(object):
 		self.LATCH_PIN = latchPin
 		self.CLOCK_PIN = clockPin
 		self.CLEAR_PIN = clearPin
-		self.reset()
 
-	def reset(self):
 		GPIO.setup(self.BUTTON_PIN, GPIO.IN)
 		GPIO.setup(self.SER_PIN, GPIO.OUT)
 		GPIO.setup(self.LATCH_PIN, GPIO.OUT)
 		GPIO.setup(self.CLOCK_PIN, GPIO.OUT)
 		GPIO.setup(self.CLEAR_PIN, GPIO.OUT)
+
+		self.reset()
+
+	def reset(self):
+		GPIO.output( self.LATCH_PIN, 0 )
+		GPIO.output( self.CLEAR_PIN, 0 )
+		GPIO.output( self.CLEAR_PIN, 1 )
+		GPIO.output( self.LATCH_PIN, 1 )
 #
 # Initialise the pins
 #

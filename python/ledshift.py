@@ -32,9 +32,13 @@ class ledshift(object):
 		GPIO.setup(self.LATCH_PIN, GPIO.OUT)
 		GPIO.setup(self.CLOCK_PIN, GPIO.OUT)
 		GPIO.setup(self.CLEAR_PIN, GPIO.OUT)
+		self.reset()
 
+	def reset(self):
+		GPIO.output( self.LATCH_PIN, 0 )
 		GPIO.output( self.CLEAR_PIN, 0 )
 		GPIO.output( self.CLEAR_PIN, 1 )
+		GPIO.output( self.LATCH_PIN, 1 )
 
 #
 # Toggle the clock pin
@@ -67,5 +71,6 @@ class ledshift(object):
 	def selftest( self ):
 		test_pattern = [ 34, 89, 123, 22, 1, 5, 73, 61, 99, 108 ]
 		for p in test_pattern:
+			print "Test: ",p
 			self.shift_byte( p )
 			time.sleep( 2 )
