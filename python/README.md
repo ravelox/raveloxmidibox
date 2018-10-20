@@ -62,8 +62,5 @@ __selftest()__ outputs a series of random numbers to test all LEDs are working
 This combines the __buttonshift__ and __ledshift__ classes in combination. Each button press will light the corresponding LED.
 
 ## raveloxmidi
-__config__
-__miditest__
-__config.json__
-The __miditest__ script will read the __config.json__ file and assign MIDI notes to button presses. Using the __raveloxmidi__ class, the
+Using __config__, __miditest__ and  __config.json__ the __miditest__ script will read the __config.json__ file and assign MIDI notes to button presses. Using the __raveloxmidi__ class, the
 MIDI events will be sent to a running __raveloxmidi_ daemon using the port defined by the raveloxmidi __network.local.port__ value.
