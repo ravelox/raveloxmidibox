@@ -69,7 +69,7 @@ class ledshift(object):
 		GPIO.output( self.LATCH_PIN, 1)
 
 	def selftest( self ):
-		test_pattern = [ 34, 89, 123, 22, 1, 5, 73, 61, 99, 108 ]
+		test_pattern = [ 34, 89, 123, 22, 1, 5, 137, 73, 61, 99, 108 ]
 		for p in test_pattern:
 			print "Test: ",p
 			self.shift_byte( p )
