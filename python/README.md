@@ -64,3 +64,32 @@ This combines the __buttonshift__ and __ledshift__ classes in combination. Each 
 ## raveloxmidi
 Using __config__, __miditest__ and  __config.json__ the __miditest__ script will read the __config.json__ file and assign MIDI notes to button presses. Using the __raveloxmidi__ class, the
 MIDI events will be sent to a running __raveloxmidi__ daemon using the port defined by the raveloxmidi __network.local.port__ value.
+
+__config.json__ has the following settings:
+
+```
+{
+	"num_buttons":0,
+	"buttons" : [
+		{ "button_id":1, "name":"Kick", "type":"note", "midi_channel":6, "midi_id":36, "midi_value":127},
+		{ "button_id":2, "name":"Snare", "type":"note", "midi_channel":6, "midi_id":38, "midi_value":127 },
+		{ "button_id":4, "name":"Tom", "type":"note", "midi_channel":6, "midi_id":40, "midi_value":127 }
+	],
+	"remote_host":"localhost",
+	"remote_port":5006
+}
+```
+__num_buttons__ is the number of available buttons on the controller. If set to __0__, the __miditest.py__ script will go through the discovery process to determine the number of buttons.
+
+__buttons__ is an array of button configurations.
+
+* __button_id__ is the value for the button used in determining button presses. It should be a power of 2 such as 1, 2, 4, 8 etc.
+* __name__ is a freeform label for the button
+* __type__ denotes what type of MIDI event should occur. At present, this is ignored and should be __"note"__
+* __midi_channel__ is the MIDI channel to send the event to
+* __midi_id__ is the event number.
+* __midi_value__ is the value for the event
+
+__remote_host__ is the name of the host running raveloxmidi
+
+__remote_port__ is port number that the raveloxmidi instance is listening on, this is defined by the network.local.port value in the raveloxmidi config file.
