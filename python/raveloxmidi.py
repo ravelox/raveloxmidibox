@@ -41,7 +41,7 @@ class raveloxmidi(object):
 		if channel > 15:
 			channel = channel & 0x0f
 		command = 0x90 | channel
-		bytes = struct.pack( "BBBB", 0xaa,command, note, velocity )
+		bytes = struct.pack( "BBB", 0xaa,command, note, velocity )
 		try:
 			self.__socket.send( bytes )
 		except:
@@ -52,7 +52,7 @@ class raveloxmidi(object):
 		if channel > 15:
 			channel = channel &0x0f
 		command = 0x80 | channel
-		bytes = struct.pack( "BBBB", 0xaa, command, note, velocity )
+		bytes = struct.pack( "BBB", 0xaa, command, note, velocity )
 		try:
 			self.__socket.send( bytes )
 		except:
